@@ -29,8 +29,39 @@ def create_app():
     # create the database tables if they don't exist
     with app.app_context():
         db.create_all()
+        seed_data()
 
     return app
+
+def seed_data():
+    from models.tip import Tip
+
+    if Tip.query.first():
+        return
+
+    tips = [
+        Tip(
+            published_date='2026-09-01',
+            title='Importance of Stretching',
+            detail='Stretching before and after exercise helps prevent injury and improves flexibility.',
+            source='https://example.com/stretching'
+        ),
+        Tip(
+            published_date='2026-09-03',
+            title='Stay Hydrated',
+            detail='Drink at least 2 liters of water per day, especially on exercise days.',
+            source='https://example.com/hydration'
+        ),
+        Tip(
+            published_date='2026-09-05',
+            title='Rest Days Are Important',
+            detail='Allow your body to recover by taking at least one rest day per week.',
+            source='https://example.com/rest'
+        ),
+    ]
+    for tip in tips:
+        db.session.add(tip)
+    db.session.commit()
 
 if __name__ == '__main__':
     app = create_app()
