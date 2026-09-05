@@ -69,3 +69,5 @@ if __name__ == '__main__':
         debug = True,
         port = 5001
     )
+
+app = create_app()
