@@ -28,6 +28,7 @@ def create_app():
 
     # create the database tables if they don't exist
     with app.app_context():
+        db.drop_all()  # Drop all tables (for development purposes)
         db.create_all()
         seed_data()
 
