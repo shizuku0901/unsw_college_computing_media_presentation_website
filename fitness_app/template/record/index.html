@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Record{% endblock %}
+
+{% block content %}
+<h1>Record</h1>
+
+<form method="POST" action="{{ url_for('record.index') }}">
+    <label>Activity</label>
+    <select name="activity_name">
+        <option value="Running">Running</option>
+        <option value="Swimming">Swimming</option>
+        <option value="Cycling">Cycling</option>
+        <option value="Yoga">Yoga</option>
+    </select>
+
+    <label>Time (minutes)</label>
+    <input type="number" name="time" min="1" required>
+
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}

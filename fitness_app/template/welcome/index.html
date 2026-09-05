@@ -1,0 +1,34 @@
+
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <h1>Welcome!</h1>
+
+    <section>
+        <h2>Member Information</h2>
+        <p>Name: User1</p>
+        <p>Age: 19</p>
+    </section>
+
+    <section>
+        <h2>Today's Exercise</h2>
+        <p>Total Time: {{ total_time }} minutes</p>
+    </section>
+
+    <section>
+        <h2>New Exercise Tips</h2>
+        <p>Check the latest tips</p>
+    </section>
+
+    <section>
+        <a href="{{ url_for('tips.index') }}">Go to Tips</a>
+    </section>
+    <section>
+        <a href="{{ url_for('facility.index') }}">Go to Facility</a>
+    </section>
+    <section>
+        <a href="{{ url_for('record.index') }}">Go to Record</a>
+    </section>
+{% endblock %}

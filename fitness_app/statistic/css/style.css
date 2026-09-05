@@ -1,0 +1,137 @@
+/* ===== Reset ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== Base ===== */
+body {
+    backfground-color: #0f0f0f;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+}
+
+/* ===== Nav ===== */
+nav {
+    background-color: #1a1a1a;
+    padding: 16px 32 px;
+    display: flex;
+    gap: 24px;
+    border-bottom: 1px solid #2e2e2e;
+}
+
+nav a {
+    color: #00e676;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+/* ===== Main ===== */
+main {
+    max-width: 800px;
+    margin: 48px auto;
+    padding: 0 24px;
+}
+
+/* ===== Heading ===== */
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 32px;
+}
+
+h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #00e676;
+    margin-bottom: 8px;
+}
+
+/* ===== Section ===== */
+section {
+    background-color: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+/* ===== Article ===== */
+article {
+    background-color: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+article p:first-child{
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+/* ===== Links ===== */
+a {
+    color: #00e676;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+/* ===== Form ===== */
+form {
+    background-color: #1a1a1a;
+    border: 1px solid #2e2e2e;
+    border-radius: 8px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+label {
+    color: #e0e0e0;
+    font-size: 14px;
+}
+
+select, input[type="number"] {
+    background-color: #0f0f0f;
+    border: 1px solid #2e2e2e;
+    border-radius: 4px;
+    color: #e0e0e0;
+    padding: 10px 12px;
+    font-size: 14px;
+    width: 100%;
+}
+
+select:focus, input[type="number"]:focus {
+    outline: none;
+    border-color: #00e676;
+}
+
+button[type="submit"] {
+    background-color: #00e676;
+    color: #0f0f0f;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #ffffff;
+}
