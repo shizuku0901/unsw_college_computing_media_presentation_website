@@ -1,34 +1,37 @@
-
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-    <h1>Welcome!</h1>
 
-    <section>
-        <h2>Member Information</h2>
-        <p>Name: User1</p>
-        <p>Age: 19</p>
-    </section>
+<h1 class="text-3xl font-bold text-white mb-8">Welcome!</h1>
 
-    <section>
-        <h2>Today's Exercise</h2>
-        <p>Total Time: {{ total_time }} minutes</p>
-    </section>
+<div class="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-4">
+    <h2 class="text-green-400 font-semibold mb-3">Member Information</h2>
+    <p>Name: User1</p>
+    <p>Age: 19</p>
+</div>
 
-    <section>
-        <h2>New Exercise Tips</h2>
-        <p>Check the latest tips</p>
-    </section>
+<div class="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-4">
+    <h2 class="text-green-400 font-semibold mb-3">Today's Exercise</h2>
+    <p>Total Time: {{ total_time }} minutes</p>
+</div>
 
-    <section>
-        <a href="{{ url_for('tips.index') }}">Go to Tips</a>
-    </section>
-    <section>
-        <a href="{{ url_for('facility.index') }}">Go to Facility</a>
-    </section>
-    <section>
-        <a href="{{ url_for('record.index') }}">Go to Record</a>
-    </section>
+<div class="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-4">
+    <h2 class="text-green-400 font-semibold mb-3">New Exercise Tips</h2>
+    <p>Check the latest tips!</p>
+</div>
+
+<div class="flex flex-col gap-3 mt-6">
+    <a href="{{ url_for('tips.index') }}" class="bg-green-400 text-gray-950 font-bold text-center py-3 rounded-lg hover:bg-white">
+        Go to Tips
+    </a>
+    <a href="{{ url_for('facility.index') }}" class="bg-green-400 text-gray-950 font-bold text-center py-3 rounded-lg hover:bg-white">
+        Go to Facility
+    </a>
+    <a href="{{ url_for('record.index') }}" class="bg-green-400 text-gray-950 font-bold text-center py-3 rounded-lg hover:bg-white">
+        Go to Record
+    </a>
+</div>
+
 {% endblock %}

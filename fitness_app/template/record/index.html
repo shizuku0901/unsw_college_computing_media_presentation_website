@@ -3,21 +3,30 @@
 {% block title %}Record{% endblock %}
 
 {% block content %}
-<h1>Record</h1>
 
-<form method="POST" action="{{ url_for('record.index') }}">
-    <label>Activity</label>
-    <select name="activity_name">
-        <option value="Running">Running</option>
-        <option value="Swimming">Swimming</option>
-        <option value="Cycling">Cycling</option>
-        <option value="Yoga">Yoga</option>
-    </select>
+<h1 class="text-3xl font-bold text-white mb-8">Record</h1>
 
-    <label>Time (minutes)</label>
-    <input type="number" name="time" min="1" required>
+<form method="POST" action="{{ url_for('record.index') }}" class="bg-gray-900 border border-gray-800 rounded-xl p-6 flex flex-col gap-4">
+    
+    <div>
+        <label class="text-gray-400 text-sm block mb-2">Activity</label>
+        <select name="activity_name" class="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2 text-gray-200 focus:outline-none focus:border-green-400">
+            <option value="Running">Running</option>
+            <option value="Swimming">Swimming</option>
+            <option value="Cycling">Cycling</option>
+            <option value="Yoga">Yoga</option>
+        </select>
+    </div>
 
-    <button type="submit">Save</button>
+    <div>
+        <label class="text-gray-400 text-sm block mb-2">Time (minutes)</label>
+        <input type="number" name="time" min="1" required class="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2 text-gray-200 focus:outline-none focus:border-green-400">
+    </div>
+
+    <button type="submit" class="bg-green-400 text-gray-950 font-bold py-3 rounded-lg hover:bg-white transition-colors">
+        Save
+    </button>
+
 </form>
 
 {% endblock %}

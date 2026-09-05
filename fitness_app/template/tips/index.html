@@ -1,21 +1,18 @@
-<!-- Use base template -->
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-<!-- Set the title of the page -->
 {% block title %}Tips{% endblock %}
 
-<!-- Define the content block -->
 {% block content %}
-<h1>Exercise Tips</h1>
 
-<!-- Loop through the tips and display each one -->
+<h1 class="text-3xl font-bold text-white mb-8">Exercise Tips</h1>
+
 {% for tip in tips %}
-    <article>
-        <!-- Display the published date, title, detail, and source of each tip -->
-        <p>{{ tip.published_date }}</p>
-        <h2>{{ tip.title }}</h2>
-        <p>{{ tip.detail }}</p>
-        <p>Source: {{ tip.source }}</p>
-    </article>
+<div class="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-4">
+    <p class="text-gray-500 text-sm mb-2">{{ tip.published_date }}</p>
+    <h2 class="text-green-400 font-semibold text-lg mb-3">{{ tip.title }}</h2>
+    <p class="mb-3">{{ tip.detail }}</p>
+    <p class="text-gray-500 text-sm">Source: {{ tip.source }}</p>
+</div>
 {% endfor %}
+
 {% endblock %}
