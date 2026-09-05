@@ -28,3 +28,10 @@ This software was developed by Rio with the assistance of Claude,
 an AI assistant made by Anthropic (https://www.anthropic.com).
 All architectural decisions, design choices, and final implementation
 were made and reviewed by the author.
+
+---
+THIRD-PARTY LIBRARIES
+
+- Flask (BSD License) https://flask.palletsprojects.com
+- Flask-SQLAlchemy (BSD License) https://flask-sqlalchemy.palletsprojects.com
+- Tailwind CSS (MIT License) https://tailwindcss.com
