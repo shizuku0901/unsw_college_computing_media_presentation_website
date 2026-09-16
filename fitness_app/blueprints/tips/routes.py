@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from models.tip import Tip
+from extensions import db
 
 # create a Blueprint instance for the tips page
 tips_bp = Blueprint('tips', __name__)
@@ -10,7 +10,9 @@ tips_bp = Blueprint('tips', __name__)
 # define the index function to render the tips page
 def index():
     # retrieve all tips from the database
-    tips = Tip.query.all()
+    tips_ref = db.collection('tips')
+    # convert the tips to a list of dictionaries
+    tips = [doc.to_dict() for doc in tips_ref.stream()]
 
     # render the tips/index.html template with the retrieved tips
     return render_template(
