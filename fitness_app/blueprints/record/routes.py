@@ -13,6 +13,11 @@ record_bp = Blueprint('record', __name__)
 # define the index function to render the record page
 def index():
 
+    # check if the user is logged in by checking if 'uid' is in the session
+    if 'uid' not in session:
+        # if the user is not logged in, redirect to the login page
+        return redirect(url_for('auth.login'))
+    
     # retrieve all activities from the database
     if request.method == 'POST':
         # retrieve the form data
@@ -21,7 +26,7 @@ def index():
 
         # add the new activity to the database
         db.collection('activities').add({
-            'user_id':'user1',
+            'user_id': session['uid'],
             'activity_name': activity_name,
             'time': int(time)
         })
