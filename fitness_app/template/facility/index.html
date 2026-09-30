@@ -6,8 +6,55 @@
 
 <h1 class="text-3xl font-bold text-white mb-8">Nearest Sport Facility</h1>
 
-<div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-    <p class="text-gray-500">Coming soon...</p>
-</div>
+<p id="status" class="text-gray-400 mb-4">Loading...</p>
+<div id="list" class="flex flex-col gap-3"></div>
+
+<p class="text-gray-600 text-xs mt-6">Data &copy; OpenStreetMap contributors</p>
+
+<script>
+    // Distance between two points in km
+    function distance(lat1, lon1, lat2, lon2) {
+        const r = Math.PI / 180;
+        const a = Math.sin((lat2 - lat1) * r / 2) ** 2 +
+                  Math.cos(lat1 * r) * Math.cos(lat2 * r) * Math.sin((lon2 - lon1) * r / 2) ** 2;
+        return 6371 * 2 * Math.asin(Math.sqrt(a));
+    }
+
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+
+        // Search within 2km
+        const query = `[out:json];
+            nwr["leisure"~"fitness_centre|sports_centre|swimming_pool|park"](around:2000,${lat},${lon});
+            out center;`;
+
+        const res = await fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query));
+        const data = await res.json();
+
+        const places = data.elements
+            .filter(e => e.tags.name)
+            .map(e => ({
+                name: e.tags.name,
+                type: e.tags.leisure,
+                km: distance(lat, lon, e.lat ?? e.center.lat, e.lon ?? e.center.lon)
+            }))
+            .sort((a, b) => a.km - b.km)
+            .slice(0, 20);
+
+        document.getElementById('status').textContent = places.length + ' facilities found';
+
+        for (const p of places) {
+            const card = document.createElement('div');
+            card.className = 'bg-gray-900 border border-gray-800 rounded-xl p-5';
+            card.innerHTML = '<h2 class="text-green-400 font-semibold"></h2><p class="text-gray-500 text-sm"></p>';
+            card.querySelector('h2').textContent = p.name;
+            card.querySelector('p').textContent = p.type + ' ・ ' + p.km.toFixed(1) + ' km';
+            document.getElementById('list').appendChild(card);
+        }
+    }, () => {
+        document.getElementById('status').textContent = 'Please allow location access.';
+    });
+</script>
 
 {% endblock %}
