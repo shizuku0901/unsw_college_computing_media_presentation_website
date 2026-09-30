@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Rio
+Copyright (c) 2026 Rio Yamada
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,14 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----
 
-DEVELOPMENT NOTICE
-
-This software was developed by Rio with the assistance of Claude,
-an AI assistant made by Anthropic (https://www.anthropic.com).
-All architectural decisions, design choices, and final implementation
-were made and reviewed by the author.
 
 ---
 THIRD-PARTY LIBRARIES
