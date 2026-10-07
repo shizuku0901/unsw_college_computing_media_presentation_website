@@ -13,12 +13,14 @@ def create_app():
     from blueprints.facility import facility_bp
     from blueprints.record import record_bp
     from blueprints.auth import auth_bp
+    from blueprints.goal import goal_bp
 
     app.register_blueprint(welcome_bp)
     app.register_blueprint(tips_bp)
     app.register_blueprint(facility_bp)
     app.register_blueprint(record_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(goal_bp)
 
     return app
 
