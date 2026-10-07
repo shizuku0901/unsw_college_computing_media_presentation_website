@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, session, redirect, url_for
 from extensions import db
+from datetime import date
 
 welcome_bp = Blueprint('welcome', __name__)
 
