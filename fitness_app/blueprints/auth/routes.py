@@ -24,6 +24,7 @@ def register():
             'name': name,
             'age': int(age),
             'email': email,
+            'uid': uid,
             'date': date.today().isoformat()  
         })
 
