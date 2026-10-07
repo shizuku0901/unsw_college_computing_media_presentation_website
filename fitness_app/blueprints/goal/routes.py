@@ -5,7 +5,7 @@ from utils import week_start, weekly_total
 goal_bp = Blueprint('goal', __name__)
 
 @goal_bp.route('/goal', methods=['GET', 'POST'])
-def goal():
+def index():
     if 'uid' not in session:
         return redirect(url_for('auth.login'))
 
