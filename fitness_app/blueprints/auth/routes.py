@@ -24,6 +24,7 @@ def register():
             'name': name,
             'age': int(age),
             'email': email,
+            'date': date.today().isoformat()  
         })
 
         # Redirect to the login page after successful registration
