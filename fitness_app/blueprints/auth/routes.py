@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session
 from extensions import db
+from datetime import date
 
 # Blueprint for authentication routes
 auth_bp = Blueprint(
@@ -24,6 +25,8 @@ def register():
             'name': name,
             'age': int(age),
             'email': email,
+            'uid': uid,
+            'created_at': date.today().isoformat()  
         })
 
         # Redirect to the login page after successful registration

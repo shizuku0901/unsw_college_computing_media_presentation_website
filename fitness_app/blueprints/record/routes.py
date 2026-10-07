@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from extensions import db
+from datetime import date
 
 # create a Blueprint instance for the record page
 record_bp = Blueprint('record', __name__)
@@ -22,13 +23,23 @@ def index():
     if request.method == 'POST':
         # retrieve the form data
         activity_name = request.form.get('activity_name')
-        time = request.form.get('time')
+        time = int(request.form.get('time'))
 
+        raw_time = request.form.get('time', '')
+
+        try:
+            time = int(raw_time)
+        except ValueError:
+            time = 0
+
+        if time < 1:
+            return redirect(url_for('record.index'))
         # add the new activity to the database
         db.collection('activities').add({
             'user_id': session['uid'],
             'activity_name': activity_name,
-            'time': int(time)
+            'time': int(time),
+            'date': date.today().isoformat()
         })
 
         return redirect(url_for('welcome.index'))
