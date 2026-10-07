@@ -5,7 +5,7 @@ def week_start():
     today = date.today()
     return (today - timedelta(days=today.weekday())).isoformat()
 
-def wee_total(uid):
+def weekly_total(uid):
     start = week_start()
     docs = db.collection('activities').where('user_id', '==', uid).stream()
     total = 0
