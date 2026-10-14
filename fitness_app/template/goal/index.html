@@ -41,4 +41,69 @@
     {% endif %}
 </div>
 
+<!-- 共有カード -->
+<div class="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-4">
+    <h2 class="text-green-400 font-semibold text-lg mb-3">Share your goal</h2>
+
+    {% if share_id %}
+    <label for="share_url" class="text-gray-500 text-sm mb-2 block">Share link</label>
+    <input id="share_url" type="text" readonly
+           value="{{ url_for('goal.shared', share_id=share_id, _external=True) }}"
+           class="w-full p-2 rounded bg-gray-800 text-white border border-gray-700 mb-3">
+    <div class="flex gap-3">
+        <button type="button" onclick="copyShareUrl()"
+                class="px-4 py-2 rounded bg-green-500 text-gray-950 font-semibold hover:bg-green-400">
+            Copy link
+        </button>
+        <form method="POST" action="{{ url_for('goal.unshare') }}">
+            <button type="submit"
+                    class="px-4 py-2 rounded bg-gray-800 text-gray-200 border border-gray-700 hover:bg-gray-700">
+                Stop sharing
+            </button>
+        </form>
+    </div>
+    <p id="copy_msg" class="text-green-400 text-sm mt-2 hidden">Copied!</p>
+    {% else %}
+    <p class="text-gray-500 text-sm mb-3">Create a link so others can see your weekly goal.</p>
+    <form method="POST" action="{{ url_for('goal.share') }}">
+        <button type="submit"
+                class="px-4 py-2 rounded bg-green-500 text-gray-950 font-semibold hover:bg-green-400">
+            Create share link
+        </button>
+    </form>
+    {% endif %}
+</div>
+
+<script>
+function copyShareUrl() {
+    const input = document.getElementById('share_url');
+    const msg = document.getElementById('copy_msg');
+
+    function show(text, ok) {
+        msg.textContent = text;
+        msg.classList.remove('hidden', 'text-green-400', 'text-red-400');
+        msg.classList.add(ok ? 'text-green-400' : 'text-red-400');
+    }
+
+    function fallback() {
+        input.focus();
+        input.select();
+        input.setSelectionRange(0, 99999);
+        try {
+            show(document.execCommand('copy') ? 'Copied!' : 'Press Ctrl+C to copy', true);
+        } catch (e) {
+            show('Press Ctrl+C to copy', false);
+        }
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(input.value)
+            .then(() => show('Copied!', true))
+            .catch(fallback);
+    } else {
+        fallback();
+    }
+}
+</script>
+
 {% endblock %}
