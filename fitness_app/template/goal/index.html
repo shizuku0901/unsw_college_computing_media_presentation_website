@@ -77,9 +77,32 @@
 <script>
 function copyShareUrl() {
     const input = document.getElementById('share_url');
-    navigator.clipboard.writeText(input.value).then(() => {
-        document.getElementById('copy_msg').classList.remove('hidden');
-    });
+    const msg = document.getElementById('copy_msg');
+
+    function show(text, ok) {
+        msg.textContent = text;
+        msg.classList.remove('hidden', 'text-green-400', 'text-red-400');
+        msg.classList.add(ok ? 'text-green-400' : 'text-red-400');
+    }
+
+    function fallback() {
+        input.focus();
+        input.select();
+        input.setSelectionRange(0, 99999);
+        try {
+            show(document.execCommand('copy') ? 'Copied!' : 'Press Ctrl+C to copy', true);
+        } catch (e) {
+            show('Press Ctrl+C to copy', false);
+        }
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(input.value)
+            .then(() => show('Copied!', true))
+            .catch(fallback);
+    } else {
+        fallback();
+    }
 }
 </script>
 

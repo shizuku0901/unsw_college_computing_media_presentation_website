@@ -1,6 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, abort
+from google.cloud.firestore import DELETE_FIELD
+from google.cloud.firestore_v1.base_query import FieldFilter
 from extensions import db
-from utils import week_start, weekly_total, new_share_id
+from utils import weekly_total, new_share_id
 
 goal_bp = Blueprint('goal', __name__)
 
@@ -14,18 +16,21 @@ def index():
 
     if request.method == 'POST':
         try:
-            minutes = int(request.form.get('weekly_minutes'), 0)
+            minutes = int(request.form.get('weekly_minutes', ''))   # ③ 括弧と既定値
         except ValueError:
             minutes = 0
         if 1 <= minutes <= 3000:
-            ref.set({'weekly_minutes': minutes})
+            ref.set({'weekly_minutes': minutes}, merge=True)        # ② merge
         return redirect(url_for('goal.index'))
 
     snap = ref.get()
-    target = snap.to_dict().get('weekly_minutes') if snap.exists else None
+    data = snap.to_dict() if snap.exists else {}
+    target = data.get('weekly_minutes')
+    share_id = data.get('share_id')                                  # ① 取り出す
     done = weekly_total(uid)
-    percent = min(100, done * 100 / target) if target else 0
-    return render_template('goal/index.html', target=target, done=done, percent=percent)
+    percent = min(100, done * 100 // target) if target else 0
+    return render_template('goal/index.html', target=target, done=done,
+                           percent=percent, share_id=share_id)      # ① 渡す
 
 @goal_bp.route('/goal/share', methods=['POST'])
 def share():
@@ -42,21 +47,25 @@ def share():
 def unshare():
     if 'uid' not in session:
         return redirect(url_for('auth.login'))
-    from google.cloud.firestore import DELETE_FIELD
     db.collection('goals').document(session['uid']).update({'share_id': DELETE_FIELD})
     return redirect(url_for('goal.index'))
 
 @goal_bp.route('/goal/<share_id>')
 def shared(share_id):
-    docs = list(db.collection('goals').where('share_id', '==', share_id).limit(1).stream())
+    docs = list(db.collection('goals')
+                .where(filter=FieldFilter('share_id', '==', share_id))
+                .limit(1).stream())
     if not docs:
-        abort(404)
+        abort(404)                                                   # ④ import済み
     goal_doc = docs[0]
     owner_uid = goal_doc.id
     target = goal_doc.to_dict().get('weekly_minutes')
 
+    user_doc = db.collection('users').document(owner_uid).get()
+    name = user_doc.to_dict().get('name', 'Someone') if user_doc.exists else 'Someone'
+
     done = weekly_total(owner_uid)
-    percent = min(100, done * 100 / target) if target else 0
+    percent = min(100, done * 100 // target) if target else 0
 
-    return render_template('goal/shared.html', target=target, done=done, percent=percent)
-
+    return render_template('goal/shared.html', name=name, target=target,
+                           done=done, percent=percent)
