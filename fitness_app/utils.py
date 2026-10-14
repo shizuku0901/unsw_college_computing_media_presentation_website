@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 from extensions import db
+import secrets
 
 def week_start():
     today = date.today()
@@ -14,3 +15,6 @@ def weekly_total(uid):
         if data.get('date', '') >= start:
             total += data.get('time', 0)
     return total
+
+def new_share_id():
+    return secrets.token_urlsafe(8)  
