@@ -42,7 +42,7 @@ def share():
 def unshare():
     if 'uid' not in session:
         return redirect(url_for('auth.login'))
-    from google.cloud.firestore import import DELETE_FIELD
+    from google.cloud.firestore import DELETE_FIELD
     db.collection('goals').document(session['uid']).update({'share_id': DELETE_FIELD})
     return redirect(url_for('goal.index'))
 
