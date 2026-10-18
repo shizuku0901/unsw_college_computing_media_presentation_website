@@ -1,0 +1,7 @@
+# <type>(scope): summary (about 50 characters, imperative mood)
+#
+# Types: feat | fix | docs | style | refactor | test | chore | ci | perf
+#
+# Body (optional): what changed and why
+#
+# Footer (optional): closes #123 / BREAKING CHANGE: ...
