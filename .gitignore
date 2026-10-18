@@ -1,0 +1,41 @@
+# ======================
+# Secrets (never commit)
+# ======================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Firebase service account key
+*firebase*.json
+serviceAccount*.json
+
+# ======================
+# OS / Editor
+# ======================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# ======================
+# Logs / Temporary files
+# ======================
+*.log
+tmp/
+.cache/
+
+# ======================
+# Python
+# ======================
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
