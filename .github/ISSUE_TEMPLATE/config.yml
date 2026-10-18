@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/shizuku0901/unsw_college_computing_media_presentation_website/security/advisories/new
+    about: Please report security issues privately here, not in a public issue.

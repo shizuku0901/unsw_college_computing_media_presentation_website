@@ -1,0 +1,63 @@
+name: "🐛 Bug report"
+description: "Report something that is not working"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill in the sections below.
+        **Do not paste secrets** (Firebase keys, `.env` contents) in logs or screenshots.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Summary"
+      description: "What went wrong?"
+      placeholder: "The Save button on the Record page does nothing"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to reproduce"
+      value: |
+        1. Go to '...'
+        2. Click '...'
+        3. Enter '...'
+        4. See the error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected behavior"
+      description: "What should have happened?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: where
+    attributes:
+      label: "Where did it happen?"
+      options:
+        - Live demo (Render)
+        - Local (python app.py)
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots / logs"
+      description: "Screenshots or error output (browser console or Flask terminal), if any"
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment"
+      description: "OS, browser, Python version (if running locally)"
+      placeholder: "e.g. Windows 11 / Chrome 130 / Python 3.12"
+    validations:
+      required: true
